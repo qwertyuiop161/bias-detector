@@ -10,11 +10,15 @@
             padding: 20px;
             text-align: center;
         }
-        #myInput {
+        #myTextArea {
             padding: 8px;
             margin-top: 20px;
             width: 300px;
             font-size: 16px;
+            overflow-y: hidden;
+            resize: none; /* Prevent manual resizing */
+            min-height: 30px; /* Initial height */
+            box-sizing: border-box;
         }
         #myButton {
             padding: 10px 20px;
@@ -36,7 +40,7 @@
     <button id="myButton">Click Me!</button>
     
     <p>Type something in the input box:</p>
-    <input type="text" id="myInput" placeholder="Type here..." />
+    <textarea id="myTextArea" placeholder="Type here..." oninput="adjustHeight(this)"></textarea>
 
     <p id="result"></p> <!-- Where the key press logs will be displayed -->
 
@@ -51,7 +55,7 @@
         button.addEventListener('click', onClickButton);
 
         // Key Press Event Listener
-        const input = document.getElementById('myInput');
+        const input = document.getElementById('myTextArea');
         const result = document.getElementById('result');
         
         function onKeyPress(event) {
@@ -60,43 +64,13 @@
         }
         
         input.addEventListener('keydown', onKeyPress);
+
+        // Function to auto-expand the textarea as user types
+        function adjustHeight(textarea) {
+            textarea.style.height = 'auto'; // Reset height to auto to shrink if needed
+            textarea.style.height = (textarea.scrollHeight) + 'px'; // Adjust height to fit content
+        }
     </script>
 
 </body>
 </html>
-<head>
-<style>
-body {background-color: powderblue;}
-h1   {color: blue;}
-p    {color: red;}
-</style>
-</head>
-<head>
-  <body>
-  <style>
-    html,body{
-height:100%;
-min-height:100%; 
-width:100%
-min-width:100%;
-}
-
-.header{
-margin-bottom:0;
-height:10%; 
-width:100%;
-background-color:#343430;
-}
-
-.search_bar input[type="text"]{
-position:relative;  
-left:20%;
-top:25%;
-width:30%;
-
-background-color:white; 
-color:grey;
-}
-    </style>
-  </body>
-</head>
